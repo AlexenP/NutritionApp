@@ -1,8 +1,6 @@
 package main.Model;
 
 import javax.persistence.*;
-import java.util.HashSet;
-import java.util.Set;
 
 @Entity
 @Table(name = "plan")
@@ -17,13 +15,16 @@ public class Plan {
     @Column(name = "planType")
     private Integer planType;
 
-    @ManyToMany
-    @JoinTable(
-            name = "plan_menu",
-            joinColumns = {@JoinColumn(name = "planId")},
-            inverseJoinColumns = {@JoinColumn(name = "menuId")}
-    )
-    private Set<Menu> menus = new HashSet<Menu>();
+    @ManyToOne(fetch = FetchType.LAZY)
+    private Menu breakfast;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    //@JoinColumn(name = "menuId", nullable = false)
+    private Menu lunch;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    //@JoinColumn(name = "menuId", nullable = false)
+    private Menu dinner;
 
     private int totalCalories = 0;
     private int totalProteins = 0;
@@ -32,11 +33,13 @@ public class Plan {
     public Plan() {
     }
 
-    public Plan(int planId, int clientId, Integer planType, Set<Menu> menus, int totalCalories, int totalProteins, int totalFats) {
+    public Plan(int planId, int clientId, Integer planType, Menu breakfast, Menu lunch, Menu dinner, int totalCalories, int totalProteins, int totalFats) {
         this.planId = planId;
         this.clientId = clientId;
         this.planType = planType;
-        this.menus = menus;
+        this.breakfast = breakfast;
+        this.lunch = lunch;
+        this.dinner = dinner;
         this.totalCalories = totalCalories;
         this.totalProteins = totalProteins;
         this.totalFats = totalFats;
@@ -48,7 +51,9 @@ public class Plan {
                 "planId=" + planId +
                 ", clientId=" + clientId +
                 ", planType=" + planType +
-                ", menus=" + menus +
+                ", breakfast=" + breakfast +
+                ", lunch=" + lunch +
+                ", dinner=" + dinner +
                 ", totalCalories=" + totalCalories +
                 ", totalProteins=" + totalProteins +
                 ", totalFats=" + totalFats +
@@ -103,11 +108,27 @@ public class Plan {
         this.planType = planType;
     }
 
-    public Set<Menu> getMenus() {
-        return menus;
+    public Menu getBreakfast() {
+        return breakfast;
     }
 
-    public void setMenus(Set<Menu> menus) {
-        this.menus = menus;
+    public void setBreakfast(Menu breakfast) {
+        this.breakfast = breakfast;
+    }
+
+    public Menu getLunch() {
+        return lunch;
+    }
+
+    public void setLunch(Menu lunch) {
+        this.lunch = lunch;
+    }
+
+    public Menu getDinner() {
+        return dinner;
+    }
+
+    public void setDinner(Menu dinner) {
+        this.dinner = dinner;
     }
 }

@@ -4,10 +4,7 @@ import main.Model.Menu;
 import main.Model.Plan;
 import main.Repository.MenuRepository;
 
-import java.util.HashSet;
-import java.util.List;
-import java.util.Scanner;
-import java.util.Set;
+import java.util.*;
 
 public class PlanService {
 
@@ -32,32 +29,47 @@ public class PlanService {
             System.out.println("Error: Data <meal> could not be applied in our database. Please try to enter the data again!");
         }
 
-        plan.setMenus(addMenuInPlan(menuRepository));
+        //plan.setMenus(addMenuInPlan(menuRepository));
+
+        addMenuInPlan(plan, menuRepository);
         addNutritions(plan);
 
         return plan;
     }
 
     private void addNutritions(Plan plan) {
-        Set<Menu> menus = plan.getMenus();
+        List<Menu> menus = new ArrayList<>();
+
+        menus.add(plan.getBreakfast());
+        menus.add(plan.getLunch());
+        menus.add(plan.getDinner());
+
         for (Menu menuSearch : menus) {
             int rezCalories;
-            rezCalories = plan.getTotalCalories() + menuSearch.getTotalCalories();
+            //if (menuSearch.getTotalCalories() == 0)
+            //    plan.setTotalCalories(plan.getTotalCalories());
+            //else
+                rezCalories = plan.getTotalCalories() + menuSearch.getTotalCalories();
             plan.setTotalCalories(rezCalories);
 
             int rezProteins;
-            rezProteins = plan.getTotalProteins() + menuSearch.getTotalProteins();
+            //if (menuSearch.getTotalProteins() == 0)
+            //    plan.setTotalProteins(plan.getTotalProteins());
+            //else
+                rezProteins = plan.getTotalProteins() + menuSearch.getTotalProteins();
             plan.setTotalProteins(rezProteins);
 
             int rezFats;
-            rezFats = plan.getTotalFats() + menuSearch.getTotalFats();
+            //if (menuSearch.getTotalFats() == 0)
+            //    plan.setTotalFats(plan.getTotalFats());
+            //else
+                rezFats = plan.getTotalFats() + menuSearch.getTotalFats();
             plan.setTotalFats(rezFats);
         }
     }
 
-    private Set<Menu> addMenuInPlan(MenuRepository menuRepository) {
+    private void addMenuInPlan(Plan plan, MenuRepository menuRepository) {
         Scanner sc = new Scanner(System.in);
-        Set<Menu> menus = new HashSet<>();
 
         System.out.println("Breakfast: ");
         System.out.println();
@@ -69,7 +81,7 @@ public class PlanService {
         System.out.println("Choose the breakfast: ");
         try {
             Menu menu = menuRepository.findById(sc.nextInt());
-            menus.add(menu);
+            plan.setBreakfast(menu);
         } catch (Exception e) {
             System.out.println(e);
         }
@@ -84,7 +96,7 @@ public class PlanService {
         System.out.println("Choose the lunch: ");
         try {
             Menu menu = menuRepository.findById(sc.nextInt());
-            menus.add(menu);
+            plan.setLunch(menu);
         } catch (Exception e) {
             System.out.println(e);
         }
@@ -99,11 +111,10 @@ public class PlanService {
         System.out.println("Choose the dinner: ");
         try {
             Menu menu = menuRepository.findById(sc.nextInt());
-            menus.add(menu);
+            plan.setDinner(menu);
         } catch (Exception e) {
             System.out.println(e);
         }
 
-        return menus;
     }
 }

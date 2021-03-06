@@ -15,16 +15,16 @@ public class Menu {
     @Column(name = "meal")
     private Integer meal;
 
-    @ManyToMany(mappedBy = "menus")
-    private Set<Plan> plans = new HashSet<Plan>();
-
     @ManyToMany
     @JoinTable(
             name = "menu_food",
             joinColumns = {@JoinColumn(name = "menuId")},
             inverseJoinColumns = {@JoinColumn(name = "foodId")}
     )
-    private Set<Food> foods = new HashSet<Food>();
+    private Set<Food> foods = new HashSet<>();
+
+    @OneToMany(mappedBy = "menu", fetch = FetchType.EAGER)
+    private Set<Menu> fullPlanMenus = new HashSet<>();
 
     private int totalCalories = 0;
     private int totalProteins = 0;
@@ -33,10 +33,9 @@ public class Menu {
     public Menu() {
     }
 
-    public Menu(int menuId, Integer meal, Set<Plan> plans, Set<Food> foods, int totalCalories, int totalProteins, int totalFats) {
+    public Menu(int menuId, Integer meal, Set<Food> foods, int totalCalories, int totalProteins, int totalFats) {
         this.menuId = menuId;
         this.meal = meal;
-        this.plans = plans;
         this.foods = foods;
         this.totalCalories = totalCalories;
         this.totalProteins = totalProteins;
@@ -48,7 +47,6 @@ public class Menu {
         return "Menu{" +
                 "menuId=" + menuId +
                 ", meal=" + meal +
-                ", plans=" + plans +
                 ", foods=" + foods +
                 ", totalCalories=" + totalCalories +
                 ", totalProteins=" + totalProteins +
@@ -96,13 +94,6 @@ public class Menu {
         this.meal = meal;
     }
 
-    public Set<Plan> getPlans() {
-        return plans;
-    }
-
-    public void setPlans(Set<Plan> plans) {
-        this.plans = plans;
-    }
 
     public Set<Food> getFoods() {
         return foods;
@@ -110,5 +101,13 @@ public class Menu {
 
     public void setFoods(Set<Food> foods) {
         this.foods = foods;
+    }
+
+    public Set<Menu> getFullPlanMenus() {
+        return fullPlanMenus;
+    }
+
+    public void setFullPlanMenus(Set<Menu> fullPlanMenus) {
+        this.fullPlanMenus = fullPlanMenus;
     }
 }
