@@ -100,11 +100,10 @@ public class MenuRepository implements RepositoryInterface<Menu> {
 
     public List<Menu> findBreakfastAll() {
         Session session = HibernateUtils.getSessionFactory().openSession();
-        System.out.println("Hibernate session started for findAll()");
+        System.out.println("Hibernate session started for findBreakfastAll()");
 
-        // Select p FROM Plan p where p.planType=1
-        Query findAllQuery = session.createQuery("Select m FROM Menu m Where m.meal=1");
-        List<Menu> menuList = findAllQuery.list();
+        Query findAllQuery = session.createQuery("FROM Menu M Where M.meal = 1");
+        List menuList = findAllQuery.list();
 
         session.close();
 
@@ -114,9 +113,9 @@ public class MenuRepository implements RepositoryInterface<Menu> {
 
     public List<Menu> findLunchAll() {
         Session session = HibernateUtils.getSessionFactory().openSession();
-        System.out.println("Hibernate session started for findAll()");
+        System.out.println("Hibernate session started for findLunchAll()");
 
-        Query findAllQuery = session.createQuery("Select m FROM Menu m Where m.meal=2");
+        Query findAllQuery = session.createQuery("FROM Menu M Where M.meal = 2");
         List<Menu> menuList = findAllQuery.list();
 
         session.close();
@@ -127,10 +126,10 @@ public class MenuRepository implements RepositoryInterface<Menu> {
 
     public List<Menu> findDinnerAll() {
         Session session = HibernateUtils.getSessionFactory().openSession();
-        System.out.println("Hibernate session started for findAll()");
+        System.out.println("Hibernate session started for findDinnerAll()");
 
-        Query findAllQuery = session.createQuery("Select m FROM Menu m Where m.meal=3");
-        List<Menu> menuList = findAllQuery.list();
+        Query findAllQuery = session.createQuery("FROM Menu M Where M.meal = 3");
+        List menuList = findAllQuery.list();
 
         session.close();
 

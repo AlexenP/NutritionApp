@@ -103,7 +103,7 @@ public class PlanRepository implements RepositoryInterface<Plan> {
         Session session = HibernateUtils.getSessionFactory().openSession();
         System.out.println("Hibernate session started for findAll()");
 
-        Query findAllQuery = session.createQuery("Select p FROM Plan p where p.planType=1");
+        Query findAllQuery = session.createQuery("FROM Plan P where P.planType = 1");
         List<Plan> planList = findAllQuery.list();
 
         session.close();
@@ -117,7 +117,7 @@ public class PlanRepository implements RepositoryInterface<Plan> {
         Session session = HibernateUtils.getSessionFactory().openSession();
         System.out.println("Hibernate session started for findAll()");
 
-        Query findAllQuery = session.createQuery("Select p FROM Plan p where p.planType=2");
+        Query findAllQuery = session.createQuery("FROM Plan P where P.planType = 2");
         List<Plan> planList = findAllQuery.list();
 
         session.close();
@@ -130,7 +130,8 @@ public class PlanRepository implements RepositoryInterface<Plan> {
         Session session = HibernateUtils.getSessionFactory().openSession();
         System.out.println("Hibernate session started for findAll()");
 
-        Query findAllQuery = session.createQuery("Select p FROM Plan p where p.planType=3");
+        Query findAllQuery = session.createQuery("FROM Plan P where P.planType = 3");
+
         List<Plan> planList = findAllQuery.list();
 
         session.close();

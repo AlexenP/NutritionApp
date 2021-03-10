@@ -15,7 +15,7 @@ public class Menu {
     @Column(name = "meal")
     private Integer meal;
 
-    @ManyToMany
+    @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(
             name = "menu_food",
             joinColumns = {@JoinColumn(name = "menuId")},
@@ -79,6 +79,9 @@ public class Menu {
                 "menuId=" + menuId +
                 ", meal=" + meal +
                 ", foods=" + foods +
+                ", breakfastPlans=" + breakfastPlans +
+                ", lunchPlans=" + lunchPlans +
+                ", dinnerPlans=" + dinnerPlans +
                 ", totalCalories=" + totalCalories +
                 ", totalProteins=" + totalProteins +
                 ", totalFats=" + totalFats +
@@ -125,7 +128,6 @@ public class Menu {
         this.meal = meal;
     }
 
-
     public Set<Food> getFoods() {
         return foods;
     }
@@ -133,5 +135,4 @@ public class Menu {
     public void setFoods(Set<Food> foods) {
         this.foods = foods;
     }
-
 }

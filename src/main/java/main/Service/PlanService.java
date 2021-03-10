@@ -74,7 +74,8 @@ public class PlanService {
         System.out.println("Breakfast: ");
         System.out.println();
         List<Menu> menusListBreakfast = menuRepository.findBreakfastAll();
-        System.out.println(menusListBreakfast);
+        for (Menu menu: menusListBreakfast)
+            System.out.println(menu);
         System.out.println();
         System.out.println();
 
