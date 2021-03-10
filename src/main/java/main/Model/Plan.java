@@ -16,14 +16,15 @@ public class Plan {
     private Integer planType;
 
     @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "breakfastId", nullable = false)
     private Menu breakfast;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    //@JoinColumn(name = "menuId", nullable = false)
+    @JoinColumn(name = "lunchId", nullable = false)
     private Menu lunch;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    //@JoinColumn(name = "menuId", nullable = false)
+    @JoinColumn(name = "dinnerId", nullable = false)
     private Menu dinner;
 
     private int totalCalories = 0;
