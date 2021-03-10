@@ -101,7 +101,7 @@ public class PlanRepository implements RepositoryInterface<Plan> {
 
     public List<Plan> findLoseWeightPlans(){
         Session session = HibernateUtils.getSessionFactory().openSession();
-        System.out.println("Hibernate session started for findAll()");
+        System.out.println("Hibernate session started for findLoseWeightPlans()");
 
         Query findAllQuery = session.createQuery("FROM Plan P where P.planType = 1");
         List<Plan> planList = findAllQuery.list();
@@ -115,7 +115,7 @@ public class PlanRepository implements RepositoryInterface<Plan> {
 
     public List<Plan> findMaintenanceWeightPlans(){
         Session session = HibernateUtils.getSessionFactory().openSession();
-        System.out.println("Hibernate session started for findAll()");
+        System.out.println("Hibernate session started for findMaintenanceWeightPlans()");
 
         Query findAllQuery = session.createQuery("FROM Plan P where P.planType = 2");
         List<Plan> planList = findAllQuery.list();
@@ -128,7 +128,7 @@ public class PlanRepository implements RepositoryInterface<Plan> {
 
     public List<Plan> findGainWeightPlans(){
         Session session = HibernateUtils.getSessionFactory().openSession();
-        System.out.println("Hibernate session started for findAll()");
+        System.out.println("Hibernate session started for findGainWeightPlans()");
 
         Query findAllQuery = session.createQuery("FROM Plan P where P.planType = 3");
 
