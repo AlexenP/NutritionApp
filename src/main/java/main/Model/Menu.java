@@ -23,8 +23,15 @@ public class Menu {
     )
     private Set<Food> foods = new HashSet<>();
 
-    @OneToMany(mappedBy = "menu", fetch = FetchType.EAGER)
-    private Set<Menu> fullPlanMenus = new HashSet<>();
+
+    @OneToMany(mappedBy = "breakfast", fetch = FetchType.EAGER)
+    private Set<Plan> breakfastPlans;
+
+    @OneToMany(mappedBy = "lunch", fetch = FetchType.EAGER)
+    private Set<Plan> lunchPlans;
+
+    @OneToMany(mappedBy = "dinner", fetch = FetchType.EAGER)
+    private Set<Plan> dinnerPlans;
 
     private int totalCalories = 0;
     private int totalProteins = 0;
@@ -40,6 +47,30 @@ public class Menu {
         this.totalCalories = totalCalories;
         this.totalProteins = totalProteins;
         this.totalFats = totalFats;
+    }
+
+    public Set<Plan> getBreakfastPlans() {
+        return breakfastPlans;
+    }
+
+    public void setBreakfastPlans(Set<Plan> breakfastPlans) {
+        this.breakfastPlans = breakfastPlans;
+    }
+
+    public Set<Plan> getLunchPlans() {
+        return lunchPlans;
+    }
+
+    public void setLunchPlans(Set<Plan> lunchPlans) {
+        this.lunchPlans = lunchPlans;
+    }
+
+    public Set<Plan> getDinnerPlans() {
+        return dinnerPlans;
+    }
+
+    public void setDinnerPlans(Set<Plan> dinnerPlans) {
+        this.dinnerPlans = dinnerPlans;
     }
 
     @Override
@@ -103,11 +134,4 @@ public class Menu {
         this.foods = foods;
     }
 
-    public Set<Menu> getFullPlanMenus() {
-        return fullPlanMenus;
-    }
-
-    public void setFullPlanMenus(Set<Menu> fullPlanMenus) {
-        this.fullPlanMenus = fullPlanMenus;
-    }
 }

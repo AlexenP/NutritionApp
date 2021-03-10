@@ -23,7 +23,7 @@ public class HibernateUtils {
 
             Properties settings = new Properties();
             settings.put(Environment.DRIVER, "com.mysql.jdbc.Driver");
-            settings.put(Environment.DIALECT, "org.hibernate.dialect.MySQLInnoDBDialect");
+            settings.put(Environment.DIALECT, "org.hibernate.dialect.MySQL5InnoDBDialect");
 
 
             settings.put(Environment.URL, DB_URL);

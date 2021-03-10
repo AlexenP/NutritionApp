@@ -25,7 +25,7 @@ public class Food {
     private Integer fats;
 
     @ManyToMany(mappedBy = "foods")
-    private Set<Menu> menus = new HashSet<Menu>();
+    private Set<Menu> menus;
 
     public Food() {
     }
