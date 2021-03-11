@@ -10,7 +10,9 @@ public class Plan {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int planId;
 
-    private int clientId;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "clientId")
+    private Client client;
 
     @Column(name = "planType")
     private Integer planType;
@@ -34,9 +36,8 @@ public class Plan {
     public Plan() {
     }
 
-    public Plan(int planId, int clientId, Integer planType, Menu breakfast, Menu lunch, Menu dinner, int totalCalories, int totalProteins, int totalFats) {
+    public Plan(int planId, Integer planType, Menu breakfast, Menu lunch, Menu dinner, int totalCalories, int totalProteins, int totalFats) {
         this.planId = planId;
-        this.clientId = clientId;
         this.planType = planType;
         this.breakfast = breakfast;
         this.lunch = lunch;
@@ -50,7 +51,6 @@ public class Plan {
     public String toString() {
         return "Plan{" +
                 "planId=" + planId +
-                ", clientId=" + clientId +
                 ", planType=" + planType +
                 ", breakfast=" + breakfast +
                 ", lunch=" + lunch +
@@ -91,14 +91,6 @@ public class Plan {
 
     public void setPlanId(int planId) {
         this.planId = planId;
-    }
-
-    public int getClientId() {
-        return clientId;
-    }
-
-    public void setClientId(int clientId) {
-        this.clientId = clientId;
     }
 
     public int getPlanType() {

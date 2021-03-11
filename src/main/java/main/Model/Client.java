@@ -2,6 +2,8 @@ package main.Model;
 
 
 import javax.persistence.*;
+import java.util.HashSet;
+import java.util.Set;
 
 @Entity
 @Table(name = "client")
@@ -36,11 +38,14 @@ public class Client {
     @PrimaryKeyJoinColumn
     private Nutrition nutrition;
 
+    @OneToMany(mappedBy = "client")
+    private Set<Plan> plans = new HashSet<>();
+
     public Client() {
     }
 
-    public Client(int departmentId, String firstName, String lastName, String sex, Integer height, Integer weight, Integer paLevel, Integer objective) {
-        this.clientId = departmentId;
+    public Client(int clientId, String firstName, String lastName, String sex, Integer height, Integer weight, Integer paLevel, Integer objective, Nutrition nutrition, Set<Plan> plans) {
+        this.clientId = clientId;
         this.firstName = firstName;
         this.lastName = lastName;
         this.sex = sex;
@@ -48,19 +53,23 @@ public class Client {
         this.weight = weight;
         this.paLevel = paLevel;
         this.objective = objective;
+        this.nutrition = nutrition;
+        //this.plans = plans;
     }
 
     @Override
     public String toString() {
         return "Client{" +
-                "departmentId=" + clientId +
+                "clientId=" + clientId +
                 ", firstName='" + firstName + '\'' +
                 ", lastName='" + lastName + '\'' +
                 ", sex='" + sex + '\'' +
                 ", height=" + height +
                 ", weight=" + weight +
-                ", paLevel='" + paLevel + '\'' +
-                ", objective='" + objective + '\'' +
+                ", paLevel=" + paLevel +
+                ", objective=" + objective +
+                ", nutrition=" + nutrition +
+                //", plans=" + plans +
                 '}' + '\n';
     }
 
@@ -135,4 +144,5 @@ public class Client {
     public void setNutrition(Nutrition nutrition) {
         this.nutrition = nutrition;
     }
+
 }
