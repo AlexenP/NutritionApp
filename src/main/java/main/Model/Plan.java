@@ -11,7 +11,7 @@ public class Plan {
     private int planId;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "clientId")
+    @JoinColumn(name = "clientId", nullable = false)
     private Client client;
 
     @Column(name = "planType")
